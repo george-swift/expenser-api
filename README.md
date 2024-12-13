@@ -127,7 +127,7 @@ $ aws lambda update-function-code --function-name <lambda-function-name> --zip-f
   "userId": "<user-id>",
   "expenseId": "<expense-id>",
   "amount": 100.0,
-  "categoryId": 5 (Food),
+  "categoryId": 5,
   "description": "Dinner at a restaurant",
   "date": "2024-12-10"
 }
@@ -152,7 +152,7 @@ $ aws lambda update-function-code --function-name <lambda-function-name> --zip-f
   {
     "expenseId": "<expense-id>",
     "amount": 100.0,
-    "categoryId": CATEGORY_ID,
+    "categoryId": 5,
     "description": "Dinner at a restaurant",
     "date": "2024-12-10"
   }
@@ -169,7 +169,7 @@ $ aws lambda update-function-code --function-name <lambda-function-name> --zip-f
 {
   "expenseId": "<expense-id>",
   "amount": 100.0,
-  "categoryId": CATEGORY_ID,
+  "categoryId": 5,
   "description": "Dinner at a restaurant",
   "date": "2024-12-10"
 }
@@ -184,7 +184,7 @@ $ aws lambda update-function-code --function-name <lambda-function-name> --zip-f
 ```json
 {
   "amount": 120.0,
-  "categoryId": CATEGORY_ID
+  "categoryId": 5
 }
 ```
 
@@ -216,8 +216,6 @@ $ poetry run make unit-tests
 ## Contributing
 
 Contributions are absolutely welcome! Kindly fork the repository and create a pull request with your changes.
-
----
 
 ---
 

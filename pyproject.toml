@@ -1,13 +1,17 @@
 [tool.poetry]
-name = "expense-tracker-api"
+name = "expenser-api"
 version = "0.1.0"
 description = ""
 authors = ["Ubong George <ubonggeorge.com>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
-python = "^3.12"
+python = "^3.12.6"
+boto3 = "^1.35.76"
+pytest-cov = "^6.0.0"
 
+
+[tool.poetry.plugins.dotenv]
 
 [tool.poetry.group.dev.dependencies]
 pre-commit = "^4.0.1"
@@ -16,11 +20,11 @@ black = "^24.10.0"
 mypy = "^1.13.0"
 isort = "^5.13.2"
 
-
 [tool.poetry.group.test.dependencies]
 pytest = "^8.3.4"
 
 [tool.pytest.ini_options]
+pythonpath = "src"
 testpaths = ["src", "tests"]
 addopts = "-p no:cacheprovider"
 
@@ -31,13 +35,11 @@ force_grid_wrap = 0
 use_parentheses = true
 line_length = 79
 
-
 [tool.black]
 line-length = 79
 target-version = ['py38']
 include = '\.pyi?$'
 exclude = ''
-
 
 [tool.mypy]
 # 3rd party import
@@ -50,7 +52,7 @@ disallow_any_explicit = true
 disallow_any_generics = false
 disallow_subclassing_any = true
 # platform
-python_version = "3.10"
+python_version = "3.12.6"
 # untyped
 disallow_untyped_calls = true
 disallow_untyped_defs = true
@@ -63,7 +65,6 @@ warn_return_any = false
 warn_unreachable = true
 # Misc
 pretty = true
-
 
 [build-system]
 requires = ["poetry-core"]

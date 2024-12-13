@@ -137,7 +137,7 @@ $ aws lambda update-function-code --function-name <lambda-function-name> --zip-f
 
 ```json
 {
-  "id": "Expense ID"
+  "id": "<expense-id>"
 }
 ```
 

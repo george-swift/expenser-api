@@ -27,7 +27,7 @@ jobs:
       - name: Install Dependencies
         run: |
           export PATH="$HOME/.local/bin:$PATH"
-          poetry install --no-dev
+          poetry install --without dev,test
 
       - name: Package Lambda Function
         run: |

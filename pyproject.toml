@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "expenser-api"
+name = "expenser-backend"
 version = "0.1.0"
 description = ""
 authors = ["Ubong George <ubonggeorge.com>"]

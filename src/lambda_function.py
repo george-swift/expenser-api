@@ -29,7 +29,7 @@ def read_all_expenses(event):
     return {
         "statusCode": 200,
         "body": expenses,
-        "headers": CORS_HEADERS,
+        "headers": {**CORS_HEADERS, 'Amount-All': len(expenses)},
     }
 
 

@@ -1,3 +1,4 @@
+import json
 import datetime
 import uuid
 from decimal import Decimal
@@ -28,7 +29,7 @@ def read_all_expenses(event):
 
     return {
         "statusCode": 200,
-        "body": expenses,
+        "body": json.dumps(expenses),
         "headers": {**CORS_HEADERS, 'Amount-All': len(expenses)},
     }
 
@@ -80,7 +81,7 @@ def read_expense(event):
         }
     return {
         "statusCode": 200,
-        "body": expense,
+        "body": json.dumps(expense),
         "headers": CORS_HEADERS,
     }
 

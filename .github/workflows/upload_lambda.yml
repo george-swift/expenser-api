@@ -27,7 +27,7 @@ jobs:
       - name: Install Production Dependencies
         run: |
           mkdir -p build
-          poetry export --without-hashes --only main -f requirements.txt > requirements.txt
+          poetry export --without-hashes --only main -f requirements.txt > build/requirements.txt
           pip install -r build/requirements.txt -t build/
 
       - name: Package Lambda Function

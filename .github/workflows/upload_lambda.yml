@@ -24,6 +24,10 @@ jobs:
           export PATH="$HOME/.local/bin:$PATH"
           poetry --version
 
+      - name: Clean previous build directory
+        run: |
+          rm -rf build
+
       - name: Install Production Dependencies
         run: |
           mkdir -p build

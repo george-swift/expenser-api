@@ -24,17 +24,13 @@ jobs:
           export PATH="$HOME/.local/bin:$PATH"
           poetry --version
 
-      - name: Install Dependencies
+      - name: Install Production Dependencies
         run: |
-          export PATH="$HOME/.local/bin:$PATH"
-          poetry install --without dev,test
+          poetry export --without-hashes --only main -f requirements.txt > requirements.txt
+          pip install -r build/requirements.txt -t build/
 
       - name: Package Lambda Function
         run: |
-          export PATH="$HOME/.local/bin:$PATH"
-          mkdir -p build
-          poetry export -f requirements.txt --output build/requirements.txt --without-hashes
-          pip install -r build/requirements.txt -t build/
           cp -R src/* build/
           cd build && zip -r ../function.zip .
 

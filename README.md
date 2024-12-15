@@ -133,7 +133,7 @@ $ aws lambda update-function-code --function-name <lambda-function-name> --zip-f
 }
 ```
 
-- **Response**:
+- **Response Body**:
 
 ```json
 {
@@ -145,7 +145,8 @@ $ aws lambda update-function-code --function-name <lambda-function-name> --zip-f
 
 - **Method**: `GET`
 - **Path**: `/expenses`
-- **Response**:
+
+- **Response Body**:
 
 ```json
 [
@@ -163,7 +164,8 @@ $ aws lambda update-function-code --function-name <lambda-function-name> --zip-f
 
 - **Method**: `GET`
 - **Path**: `/expenses/{expenseId}`
-- **Response**:
+
+- **Response Body**:
 
 ```json
 {
@@ -179,6 +181,7 @@ $ aws lambda update-function-code --function-name <lambda-function-name> --zip-f
 
 - **Method**: `PUT`
 - **Path**: `/expenses/{expenseId}`
+
 - **Request Body**:
 
 ```json
@@ -188,7 +191,7 @@ $ aws lambda update-function-code --function-name <lambda-function-name> --zip-f
 }
 ```
 
-- **Response**:
+- **Response Body**:
 
 ```json
 {
@@ -200,6 +203,12 @@ $ aws lambda update-function-code --function-name <lambda-function-name> --zip-f
 
 - **Method**: `DELETE`
 - **Path**: `/expenses/{expenseId}`
+
+- **Response Status Code**
+
+```bash
+204
+```
 
 ---
 

@@ -1,7 +1,7 @@
 from datetime import datetime
 
-from src.utils.categories import VALID_CATEGORIES
-from src.utils.exceptions import UnauthorizedError
+from categories import VALID_CATEGORIES
+from exceptions import UnauthorizedError
 
 
 def validate_user(event) -> str:

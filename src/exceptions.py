@@ -13,9 +13,9 @@ class UnauthorizedError(Exception):
 
 
 def handle_errors(handler):
-    def wrapper(event, context):
+    def wrapper(event):
         try:
-            return handler(event, context)
+            return handler(event)
         except UnauthorizedError as error:
             return {
                 "statusCode": 401,
@@ -38,6 +38,7 @@ def handle_errors(handler):
                 ),
             }
         except Exception as error:
+            print(error)
             return {
                 "statusCode": 500,
                 "body": json.dumps(

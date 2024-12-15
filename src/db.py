@@ -10,7 +10,6 @@ logger = logging.getLogger()
 dynamodb = boto3.resource("dynamodb")
 table = dynamodb.Table(os.environ.get("EXPENSER_DYNAMODB_EXPENSES"))
 
-
 def get_all_from_dynamodb(user_id: str) -> list[dict]:
     """
     Retrieves all expenses for a user from the DynamoDB table.
@@ -26,7 +25,9 @@ def get_all_from_dynamodb(user_id: str) -> list[dict]:
     """
     try:
         response = table.query(
-            KeyConditionExpression=Key("userId").eq(user_id)
+            KeyConditionExpression=Key("userId").eq(user_id),
+            ProjectionExpression="expenseId, amount, categoryName, description, #dt",
+            ExpressionAttributeNames={"#dt": "date"}
         )
         items = response.get("Items", [])
         if items:
@@ -60,7 +61,9 @@ def get_from_dynamodb(user_id: str, expense_id: str) -> dict | None:
     """
     try:
         response = table.get_item(
-            Key={"userId": user_id, "expenseId": expense_id}
+            Key={"userId": user_id, "expenseId": expense_id},
+            ProjectionExpression="expenseId, amount, categoryName, description, #dt",
+            ExpressionAttributeNames={"#dt": "date"}
         )
         item = response.get("Item")
         if item:
@@ -105,23 +108,24 @@ def update_in_dynamodb(data: dict) -> None:
         ClientError: If the update operation fails.
     """
     try:
+        update_data = {key: value for key, value in data.items() if key not in ["userId", "expenseId"]}
+        
         update_expression = "SET " + ", ".join(
-            f"#{key} = :{key}" for key in data.keys()
+            f"#{key} = :{key}" for key in update_data.keys()
         )
         expression_attribute_values = {
-            f":{key}": value for key, value in data.items()
+            f":{key}": value for key, value in update_data.items()
         }
-        expression_attribute_names = {f"#{key}": key for key in data.keys()}
-        condition_expression = Attr("userId").eq(data["userId"])
-
+        expression_attribute_names = {f"#{key}": key for key in update_data.keys()}
+        
         table.update_item(
             Key={"userId": data["userId"], "expenseId": data["expenseId"]},
             UpdateExpression=update_expression,
             ExpressionAttributeValues=expression_attribute_values,
             ExpressionAttributeNames=expression_attribute_names,
-            ConditionExpression=condition_expression,
+            ConditionExpression=Attr("userId").eq(data["userId"])
         )
-        logger.info("Expense updated: %s", data)
+        logger.info(f"Expense updated: {data}")
     except ClientError as error:
         logger.error(f"Error updating expense: {error}", exc_info=True)
         raise
